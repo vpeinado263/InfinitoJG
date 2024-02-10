@@ -32,8 +32,7 @@ router.put(
   knivesControllers.updateKnifeByID
 );
 
-
-router.delete('/borrar/:id', [checkID, validateID], knivesControllers.deleteKnifeByID);
+router.post('/crear', validateCreateKnife, knivesControllers.createKnife);
 
 router.get('/ver', knivesControllers.getKnives);
 
@@ -41,7 +40,15 @@ router.get('/ver/:id', validateID, knivesControllers.getKnivesById);
 
 router.get('/ver/codigo/:codigo', knivesControllers.getKnivesByCode);
 
-router.post('/crear', validateCreateKnife, knivesControllers.createKnife);
+router.delete('/borrar/:id', [checkID, validateID], knivesControllers.deleteKnifeByID);
+
+
+
+
+
+
+
+
 
 
 router.use(errorHandler);

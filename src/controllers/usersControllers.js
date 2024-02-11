@@ -54,10 +54,26 @@ const getSingleUser = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const response = await axios.delete(`https://api.escuelajs.co/api/v1/users/${id}`);
+      const success = response.data;
+      if (success) {
+        res.status(200).json({ msg: '¡Usuario Eliminado.!' });
+      } else {
+        res.status(404).json({ msg: 'Usuario no Encontrado.' });
+      }
+    } catch (error) {
+      res.status(500).json({ msg: 'Error al Eliminar al Usuario - ' + error.message });
+    }
+};
+
 module.exports = {
     createUser,
     getAllUsers,
     updateUser,
     checkEmailAvailability,
     getSingleUser,
+    deleteUser,
 }

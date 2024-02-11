@@ -1,17 +1,33 @@
 const express = require('express');
 const { body } = require('express-validator');
 const usersControllers = require('../controllers/usersControllers');
+const checkID = require('../middlewares/checkID');
+const errorHandler = require('../middlewares/errorHandler');
 
 const router = express.Router();
+
+router.use(errorHandler);
 
 router.post('/createUser', usersControllers.createUser)
 
 router.get('/', usersControllers.getAllUsers);
 
-router.put('/updateUser/:id', usersControllers.updateUser);
+router.put('/updateUser/:id', 
+[checkID],
+[
+    body('name').isString(),
+    body('email').isEmail(),
+    body('password').isString(),
+],
+
+usersControllers.updateUser
+
+);
 
 router.post('/checkEmailAvailability', usersControllers.checkEmailAvailability);
 
-router.get('/getSingleUser/:id', usersControllers.getSingleUser),
+router.get('/getSingleUser/:id', [checkID], usersControllers.getSingleUser),
+
+router.delete('/deleteUser/:id', usersControllers.deleteUser);
 
 module.exports = router;

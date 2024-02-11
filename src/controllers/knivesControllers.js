@@ -1,11 +1,11 @@
 const knifeModel = require('../models/knifeModel');
 const { validationResult } = require('express-validator');
 
-// Crear un cuchillo
+// Crear 
 const createKnife = async (req, res) => {
   try {
     const newKnife = await knifeModel.create(req.body);
-    res.status(201).json({ knife: newKnife, msg: "Cuchillo creado" });
+    res.status(201).json({ knife: newKnife, msg: "¡Cuchillo creado!" });
   } catch (error) {
     res.status(500).json({
       knife: null,
@@ -14,11 +14,11 @@ const createKnife = async (req, res) => {
   }
 };
 
-// Ver todos los cuchillos
+// Ver todo
 const getKnives = async (req, res) => {
   try {
     const knives = await knifeModel.find();
-    res.status(200).json({ knives, msg: "Todos los cuchillos de InfinitoJG" });
+    res.status(200).json({ knives, msg: "Todos los Cuchillos de InfinitoJG" });
   } catch (error) {
     res.status(500).json({
       knives: null,
@@ -27,7 +27,7 @@ const getKnives = async (req, res) => {
   }
 };
 
-// Obtener un cuchillo por su ID
+// Obtener por ID
 const getKnivesById = async (req, res) => {
   try {
     const knife = await knifeModel.findById(req.params.id);
@@ -40,7 +40,7 @@ const getKnivesById = async (req, res) => {
   }
 };
 
-// Obtener un cuchillo por su CÓDIGO
+// Obtener por CÓDIGO
 const getKnivesByCode = async (req, res) => {
   try {
     const knife = await knifeModel.findOne({ codigo: req.params.codigo });
@@ -56,7 +56,7 @@ const getKnivesByCode = async (req, res) => {
   }
 };
 
-// Actualizar un cuchillo por su ID
+// Actualizar por ID
 const updateKnifeByID = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -72,28 +72,28 @@ const updateKnifeByID = async (req, res) => {
     );
 
     if (!updatedKnife) {
-      return res.status(404).json({ msg: 'Cuchillo no encontrado' });
+      return res.status(404).json({ msg: 'Cuchillo no Encontrado' });
     }
 
-    res.status(200).json({ knife: updatedKnife, msg: 'Cuchillo actualizado correctamente' });
+    res.status(200).json({ knife: updatedKnife, msg: 'Cuchillo Actualizado Correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al actualizar el cuchillo - ' + error.message });
+    res.status(500).json({ msg: 'Error al Actualizar el Cuchillo - ' + error.message });
   }
 };
 
-// Borrar un cuchillo por su ID
+// Borrar por ID
 const deleteKnifeByID = async (req, res) => {
   try {
     const id = req.params.id;
     const deletedKnife = await knifeModel.findByIdAndDelete(id);
 
     if (!deletedKnife) {
-      return res.status(404).json({ msg: 'Cuchillo no encontrado' });
+      return res.status(404).json({ msg: 'Cuchillo no Encontrado' });
     }
 
-    res.status(200).json({ knife: deletedKnife, msg: 'Cuchillo borrado correctamente' });
+    res.status(200).json({ knife: deletedKnife, msg: 'Cuchillo Borrado Correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al borrar el cuchillo - ' + error.message });
+    res.status(500).json({ msg: 'Error al Borrar el Cuchillo - ' + error.message });
   }
 };
 

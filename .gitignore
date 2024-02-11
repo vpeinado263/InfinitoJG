@@ -1,2 +1,4 @@
+#Dependencias
 node_modules/
+#Se ignora el archivo de configuracion especifico del entorno
 .env

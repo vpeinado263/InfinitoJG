@@ -1,6 +1,6 @@
 const errorHandler = (err, req, res, next) => {
     console.error(err.stack);
-    res.status(500) .json({ message: '"¡Vaya! Algo salio mal"'})
+    res.status(500) .json({ message: '"¡Vaya! Algo salio Mal"'})
 };
 
 module.exports = errorHandler;

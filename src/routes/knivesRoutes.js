@@ -3,24 +3,13 @@ const { body } = require('express-validator');
 const knivesControllers = require('../controllers/knivesControllers');
 const errorHandler = require('../middlewares/errorHandler');
 const checkID = require('../middlewares/checkID');
-const { validateCreateKnife } = require('../validdation/validations');
+const { validateCreateKnife } = require('../validdation/validationsKnives');
 
 const router = express.Router();
 
 router.use(errorHandler);
 
-router.put(
-  '/actualizar/:id',
-  [checkID], 
-  [
-    body('nombre').optional().isString(),
-    body('precio').optional().isNumeric(),
-    body('material').optional().isString(),
-    body('descripcion').optional().isString(),
-    body('disponible').optional().isBoolean(),
-  ],
-  knivesControllers.updateKnifeByID
-);
+router.put('/actualizar/:id',[checkID, validateCreateKnife], knivesControllers.updateKnifeByID);
 
 router.post('/crear', validateCreateKnife, knivesControllers.createKnife);
 

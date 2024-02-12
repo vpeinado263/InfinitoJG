@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 const usersControllers = require('../controllers/usersControllers');
 const checkID = require('../middlewares/checkID');
 const errorHandler = require('../middlewares/errorHandler');
+const { validateCreateUser } = require('../validdation/validationsUsers');
 
 const router = express.Router();
 
@@ -13,12 +14,8 @@ router.post('/createUser', usersControllers.createUser)
 router.get('/', usersControllers.getAllUsers);
 
 router.put('/updateUser/:id', 
-[checkID],
-[
-    body('name').isString(),
-    body('email').isEmail(),
-    body('password').isString(),
-],
+[checkID, ],
+
 
 usersControllers.updateUser
 

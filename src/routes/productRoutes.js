@@ -3,23 +3,13 @@ const { body } = require('express-validator');
 const productControllers = require('../controllers/productControllers');
 const checkID = require('../middlewares/checkID');
 const errorHandler = require('../middlewares/errorHandler');
+const { validateCreateProduct } = require('../validdation/validationsProduct'); 
 
 const router = express.Router();
 
 router.use(errorHandler);
 
-router.put(
-  '/actualizar/:id',
-  [checkID],
-  [
-    body('title').optional().isString(),
-    body('price').optional().isNumeric(),
-    body('description').optional().isString(),
-    body('categoryId').optional().isNumeric(),
-    body('images').optional().isArray(),
-  ],
-  productControllers.updateProduct
-);
+router.put('/actualizar/:id', [checkID, validateCreateProduct], productControllers.updateProduct);
 
 router.post('/crear', productControllers.createProduct);
 

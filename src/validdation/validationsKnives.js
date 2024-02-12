@@ -1,6 +1,7 @@
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
 
 const validateCreateKnife = [
+  
   body('nombre').optional().isString(),
   body('precio').optional().isNumeric(),
   body('material').optional().isString(),

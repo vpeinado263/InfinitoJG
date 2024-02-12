@@ -6,7 +6,7 @@ const createProduct = async (res) => {
   try {
     const response = await axios.post('https://api.escuelajs.co/api/v1/products');
     const newProducts = response.data;
-    res.status(201).json({ products: newProducts, msg: '¡Producto Obtenido Correctamente.!' });
+    res.status(200).json({ products: newProducts, msg: '¡Producto Obtenido Correctamente.!' });
   } catch (error) {
     res.status(500).json({
       products: null,

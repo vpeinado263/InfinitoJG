@@ -1,5 +1,5 @@
 const app = require('./app');
-const connectDB = require('../Proyecto-Final-Backend/src/database/dbConnection');
+const connectDB = require('./src/database/dbConnection');
 
 const startServer = async () => {
   await connectDB();

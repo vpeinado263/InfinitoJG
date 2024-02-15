@@ -1,33 +1,13 @@
 const express = require('express');
-const session = require('express-session');
 const app = express();
-const errorHandler = require('./src/middlewares/errorHandler');
-const logRequest = require('./src/middlewares/logRequest');
-const knivesRouter = require('./src/routes/knivesRoutes');
-const productsRouter = require('./src/routes/productRoutes');
-const usersRoutes = require('./src/routes/usersRoutes');
-const sessionConfig = require('./src/utils/sessionConfig');
-const cors = require('cors');
-
-app.use(cors());
+const logRequest = require('./middlewares/logRequest');
+const knivesRouter = require('./routes/knivesRoutes');
 
 app.use(express.json());
-
 app.use(logRequest);
-app.use(errorHandler);
-app.use(session(sessionConfig));
-
-
-app.use('/knives', knivesRouter);
-app.use('/products', productsRouter)
-app.use('/users', usersRoutes);
-
 app.use('/', (req, res) => {
-  res.send('Bienvenidos a InfinitoJG!');
+  res.send('Bienvenidos a Cuchilleria InfinitoJG!');
 });
-
-app.use((req, res) => {
-  res.status(400).send('404 - Pagina no encontrada');
-});
+app.use('/knives', knivesRouter);
 
 module.exports = app;

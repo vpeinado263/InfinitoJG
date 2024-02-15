@@ -9,7 +9,10 @@ const createKnife = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       knife: null,
-      msg: "Error al crear el cuchillo - " + error.message,
+      error: {
+        msg: "Error al crear el cuchillo",
+        details: error.message,
+      },
     });
   }
 };
@@ -22,7 +25,10 @@ const getKnives = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       knives: null,
-      msg: "Error al obtener cuchillos - " + error.message,
+      error: {
+        msg: "Error al obtener cuchillos",
+        details: error.message,
+      },
     });
   }
 };
@@ -35,7 +41,10 @@ const getKnivesById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       knife: null,
-      msg: "Error al obtener cuchillo - " + error.message,
+      error: {
+        msg: "Error al obtener el cuchillo por ID",
+        details: error.message,
+      },
     });
   }
 };
@@ -51,7 +60,10 @@ const getKnivesByCode = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       knife: null,
-      msg: 'Error al obtener cuchillo - ' + error.message,
+      error: {
+        msg: "Error al obtener el Cuchillo por Codigo",
+        details: error.message,
+      },
     });
   }
 };
@@ -77,7 +89,7 @@ const updateKnifeByID = async (req, res) => {
 
     res.status(200).json({ knife: updatedKnife, msg: 'Cuchillo Actualizado Correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Actualizar el Cuchillo - ' + error.message });
+    res.status(500).json({ msg: 'Error al Actualizar el Cuchillo', details: error.message });
   }
 };
 
@@ -93,7 +105,7 @@ const deleteKnifeByID = async (req, res) => {
 
     res.status(200).json({ knife: deletedKnife, msg: 'Cuchillo Borrado Correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Borrar el Cuchillo - ' + error.message });
+    res.status(500).json({ msg: 'Error al Borrar el Cuchillo', details: error.message});
   }
 };
 

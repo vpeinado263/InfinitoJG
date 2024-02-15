@@ -8,4 +8,4 @@ const validateCreateProduct = [
     body('images').optional().isArray(),
 ];
 
-module.exports = {validateCreateProduct}
+module.exports = {validateCreateProduct};

@@ -6,12 +6,10 @@ const createProduct = async (res) => {
   try {
     const response = await axios.post('https://api.escuelajs.co/api/v1/products');
     const newProducts = response.data;
-    res.status(200).json({ products: newProducts, msg: '¡Producto Obtenido Correctamente.!' });
+    res.status(200).json({ products: newProducts});
   } catch (error) {
     res.status(500).json({
-      products: null,
-      msg: "Error al Crear el Producto - " + error.message,
-    });
+      products: null, error: error.message });
   }
 };
 
@@ -19,12 +17,10 @@ const getAllProducts = async (res) => {
   try {
     const response = await axios.get('https://api.escuelajs.co/api/v1/products');
     const products = response.data;
-    res.status(200).json({ products, msg: "¡Todos los Productos de Platzi Fake Store API.!" });
+    res.status(200).json({ products });
   } catch (error) {
     res.status(500).json({
-      products: null,
-      msg: "Error al Obtener los Productos - " + error.message,
-    });
+      products: null, error: error.message });
   }
 };
 
@@ -35,7 +31,7 @@ const getProductById = async (req, res) => {
     const product = response.data;
     res.status(200).json({ product, msg: '¡Producto Obtenido Correctamente.!' });
   } catch (error) {
-    res.status(500).json({ product: null, msg: 'Error al Obtener el Producto - ' + error.message });
+    res.status(500).json({ product: null, error: error.message });
   }
 };
 
@@ -44,9 +40,9 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const response = await axios.put(`https://api.escuelajs.co/api/v1/products/${id}`, req.body);
     const updatedProduct = response.data;
-    res.status(200).json({ product: updatedProduct, msg: '¡Producto Actualizado Correctamente.!' });
+    res.status(200).json({ product });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Actualizar el Producto - ' + error.message });
+    res.status(500).json({ error: error.message});
   }
 };
 
@@ -56,12 +52,12 @@ const deleteProduct = async (req, res) => {
     const response = await axios.delete(`https://api.escuelajs.co/api/v1/products/${id}`);
     const success = response.data;
     if (success) {
-      res.status(200).json({ msg: '¡Producto Eliminado Correctamente.!' });
+      res.status(200).json({ sucess: true});
     } else {
-      res.status(404).json({ msg: 'Producto no Encontrado.' });
+      res.status(404).json({ success: false, error: 'Proucto no encontrado'});
     }
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Eliminar el Producto - ' + error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

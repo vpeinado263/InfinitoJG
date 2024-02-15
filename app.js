@@ -6,7 +6,10 @@ const logRequest = require('./src/middlewares/logRequest');
 const knivesRouter = require('./src/routes/knivesRoutes');
 const productsRouter = require('./src/routes/productRoutes');
 const usersRoutes = require('./src/routes/usersRoutes');
-const sessionConfig = require('./src/utilis/sessionConfig');
+const sessionConfig = require('./src/utils/sessionConfig');
+const cors = require('cors');
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -21,6 +24,10 @@ app.use('/users', usersRoutes);
 
 app.use('/', (req, res) => {
   res.send('Bienvenidos a InfinitoJG!');
+});
+
+app.use((req, res) => {
+  res.status(400).send('404 - Pagina no encontrada');
 });
 
 module.exports = app;

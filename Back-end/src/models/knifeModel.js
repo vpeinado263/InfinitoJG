@@ -32,7 +32,7 @@ const knifeSchema = new Schema({
     material: {
         type: String,
     },
-}, {timestamps: true});
+}, { timestamps: true });
 
 const Knife = mongoose.model('Knife', knifeSchema);
 

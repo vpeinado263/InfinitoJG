@@ -1,7 +1,6 @@
 const knifeModel = require('../models/knifeModel');
 const { validationResult } = require('express-validator');
 
-// Crear 
 const createKnife = async (req, res) => {
   try {
     const newKnife = await knifeModel.create(req.body);
@@ -10,14 +9,13 @@ const createKnife = async (req, res) => {
     res.status(500).json({
       knife: null,
       error: {
-        msg: "Error al crear el cuchillo",
+        message: "Error al crear el cuchillo",
         details: error.message,
       },
     });
   }
 };
 
-// Ver todo
 const getKnives = async (req, res) => {
   try {
     const knives = await knifeModel.find();
@@ -26,50 +24,14 @@ const getKnives = async (req, res) => {
     res.status(500).json({
       knives: null,
       error: {
-        msg: "Error al obtener cuchillos",
+        message: "Error al obtener cuchillos",
         details: error.message,
       },
     });
   }
 };
 
-// Obtener por ID
-const getKnivesById = async (req, res) => {
-  try {
-    const knife = await knifeModel.findById(req.params.id);
-    res.status(200).json({ knife, msg: "ok" });
-  } catch (error) {
-    res.status(500).json({
-      knife: null,
-      error: {
-        msg: "Error al obtener el cuchillo por ID",
-        details: error.message,
-      },
-    });
-  }
-};
-
-// Obtener por CÓDIGO
-const getKnivesByCode = async (req, res) => {
-  try {
-    const knife = await knifeModel.findOne({ codigo: req.params.codigo });
-    if (!knife) {
-      return res.status(404).json({ msg: 'Cuchillo no encontrado' });
-    }
-    res.status(200).json({ knife, msg: 'ok' });
-  } catch (error) {
-    res.status(500).json({
-      knife: null,
-      error: {
-        msg: "Error al obtener el Cuchillo por Codigo",
-        details: error.message,
-      },
-    });
-  }
-};
-
-// Actualizar por ID
-const updateKnifeByID = async (req, res) => {
+const updateKnivesById = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -84,37 +46,65 @@ const updateKnifeByID = async (req, res) => {
     );
 
     if (!updatedKnife) {
-      return res.status(404).json({ msg: 'Cuchillo no Encontrado' });
+      return res.status(404).json({ error: 'Cuchillo no encontrado' });
     }
 
-    res.status(200).json({ knife: updatedKnife, msg: 'Cuchillo Actualizado Correctamente' });
+    res.status(200).json({ knife: updatedKnife, message: 'Cuchillo actualizado correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Actualizar el Cuchillo', details: error.message });
+    res.status(500).json({ error: 'Error al actualizar el cuchillo', details: error.message });
   }
 };
 
-// Borrar por ID
-const deleteKnifeByID = async (req, res) => {
+const deleteKnivesById = async (req, res) => {
   try {
     const id = req.params.id;
     const deletedKnife = await knifeModel.findByIdAndDelete(id);
 
     if (!deletedKnife) {
-      return res.status(404).json({ msg: 'Cuchillo no Encontrado' });
+      return res.status(404).json({ error: 'Cuchillo no encontrado' });
     }
 
-    res.status(200).json({ knife: deletedKnife, msg: 'Cuchillo Borrado Correctamente' });
+    res.status(200).json({ knife: deletedKnife, message: 'Cuchillo borrado correctamente' });
   } catch (error) {
-    res.status(500).json({ msg: 'Error al Borrar el Cuchillo', details: error.message});
+    res.status(500).json({ error: 'Error al borrar el cuchillo', details: error.message });
+  }
+};
+
+const getKnifeById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const knife = await knifeModel.findById(id);
+
+    if (!knife) {
+      return res.status(404).json({ error: 'Cuchillo no encontrado' });
+    }
+
+    res.status(200).json({ knife });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getKnivesByCode = async (req, res) => {
+  try {
+    const { codigo } = req.params;
+    const knife = await knifeModel.findOne({ codigo });
+
+    if (!knife) {
+      return res.status(404).json({ error: 'Cuchillo no encontrado' });
+    }
+
+    res.status(200).json({ knife });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
 module.exports = {
-  getKnives,
-  getKnivesById,
-  getKnivesByCode,
   createKnife,
-  updateKnifeByID,
-  deleteKnifeByID
+  getKnives,
+  updateKnivesById,
+  deleteKnivesById,
+  getKnivesByCode,
+  getKnifeById
 };
-

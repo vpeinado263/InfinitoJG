@@ -21,7 +21,7 @@ router.post('/crear', validateCreateKnife, knivesControllers.createKnife);
 
 router.get('/ver', knivesControllers.getKnives);
 
-router.get('/ver/:id', [checkID], knivesControllers.getKnifeById); 
+router.get('/ver/:id', [checkID], knivesControllers.getKnifeById);
 
 router.get('/ver/codigo/:codigo', knivesControllers.getKnivesByCode);
 

@@ -9,8 +9,7 @@ const startServer = async () => {
     const server = app.listen(port, () => {
       console.log(`Servidor funcionando en http://localhost:${port}`);
     });
-
-    // Manejar eventos de cierre para que Nodemon pueda reiniciar correctamente
+    
     process.on('SIGINT', () => {
       console.log('Cerrando el servidor...');
       server.close(() => {

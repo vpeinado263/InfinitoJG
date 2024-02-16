@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+// API de Platzi Fake Store
+
 const createProduct = async (req, res) => {
   try {
     const response = await axios.post('https://api.escuelajs.co/api/v1/products');

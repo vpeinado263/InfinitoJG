@@ -1,89 +1,37 @@
-* { box-sizing: border-box;
-  margin: 0;
-  padding: 0;}
-.dark {background-color: black;
-     color: white;}
-
-     /*shopping cart*/
-.box {
-  padding: 1rem;
-  margin: 1rem;
-  background-color: aqua;
+@font-face {
+  font-family: 'fire';
+  src: url('../../public/fonts/FIRES\ PERSONAL\ USE.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-.grid-responsive {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+@font-face {
+  font-family: 'Book';
+  src: url('../../public/fonts/ConsolaMono-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.product {
-  padding: 1rem;
-  background-color: rgb(114, 19, 209);
-  color: white;
-}
-.cart-item {
-  background-color: crimson;
-  padding: 1rem;
-  color: white;
-}
-/******loader***/
-
-.lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #1D4018;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
-.lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
-}
-@keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
-}
-@keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(24px, 0);
-  }
+body {
+  
+  background-color: rgba(216, 216, 216, 0.925);
+  font-family: 'Book';
 }
 
-.spinnercentro {
-width: 90%
+
+/*formulario de boostraop*/
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.from {
+  background-color: rgb(243, 248, 248);
+  padding: 4rem;
+  border-radius: 10rem;
 }
+
+.titulo {
+  font-family: 'fire';
+  text-align: center;
+  
+}
+
+

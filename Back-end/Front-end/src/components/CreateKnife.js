@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const CreateKnife = () => {
   const router = useRouter();
@@ -62,66 +62,63 @@ const CreateKnife = () => {
 
   return (
     <>
-      <h1>Crear Cuchillo</h1>
-      <Form onSubmit={handleSubmit}>
-        <Row className="mb-3">
-          <Form.Group as={Col} controlId="formCodigo">
-            <Form.Label>Codigo</Form.Label>
-            <Form.Control
-              type="text"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group as={Col} controlId="formNombre">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group as={Col} controlId="formModelo">
-            <Form.Label>Modelo</Form.Label>
-            <Form.Control
-              type="text"
-              value={modelo}
-              onChange={(e) => setModelo(e.target.value)}
-            />
-          </Form.Group>
-        </Row>
-        <Form.Group className="mb-3" controlId="formPrecio">
-          <Form.Label>Precio</Form.Label>
+     <h1 className="titulo">Crear Cuchillo</h1>
+     <Form className="from" onSubmit={handleSubmit}>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formCodigo">
+          <Form.Label>Codigo</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="1234 $"
-            value={precio}
-            onChange={(e) => setPrecio(e.target.value)}
+          type="text"
+          value={codigo}
+          onChange={(e) => setCodigo(e.target.value)}/>
+        </Form.Group>
+        <Form.Group as={Col} controlId="formNombre">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
           />
         </Form.Group>
-        <Row className="mb-3">
+        <Form.Group as={Col} controlId="formModelo">
+          <Form.Label>Modelo</Form.Label>
+          <Form.Control
+          type="text"
+          value={modelo}
+          onChange={(e) => setModelo(e.target.value)}
+          />
+        </Form.Group>
+      </Row>
+      <Form.Group className="mb-3" controlId="formPrecio">
+        <Form.Label>Precio</Form.Label>
+        <Form.Control
+        type="text"
+        placeholder="1234 $"
+        value={precio}
+        onChange={(e) => setPrecio(e.target.value)}
+        />
+      </Form.Group>
+      <Row className="mb-3">
         <Form.Group as={Col} controlId="formValor">
-            <Form.Label>Medidas (Valor)</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Valor"
-              value={valor}
-              onChange={(e) => setValor(e.target.value)}
-            />
+          <Form.Label>Largo Total del Cuchillo (Valor)</Form.Label>
+          <Form.Control
+          type="text"
+          placeholder="Valor"
+          value={valor}
+          onChange={(e) => setValor(e.target.value)}
+          />
         </Form.Group>
         <Form.Group as={Col} controlId="formUnidad">
-          <Form.Group as={Col} controlId="formUnidad">
-           <Form.Label>Medidas (Unidad)</Form.Label>
-           <Form.Select
-           value={unidad}
-           onChange={(e) => setUnidad(e.target.value)} >
-            <option value="" disabled>Select unidad</option>
-            <option value="pulgadas">pulgadas</option>
-            <option value="cm">cm</option>
+            <Form.Label>Medidas (Unidad)</Form.Label>
+            <Form.Select
+             value={unidad}
+             onChange={(e) => setUnidad(e.target.value)} >
+             <option value="" disabled>Select unidad</option>
+             <option value="pulgadas">pulgadas</option>
+             <option value="cm">cm</option>
             </Form.Select>
-           </Form.Group>  
-          </Form.Group>
-        </Row>
+        </Form.Group>  
+      </Row>
         <Form.Group className="mb-3" controlId="formDescripcion">
           <Form.Label>Descripcion</Form.Label>
           <Form.Control
@@ -131,7 +128,7 @@ const CreateKnife = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formMaterial">
-          <Form.Label>Material</Form.Label>
+          <Form.Label>Material de la Hoja</Form.Label>
           <Form.Control
             type="text"
             value={material}
@@ -143,16 +140,15 @@ const CreateKnife = () => {
             {errorMessage}
           </div>
         )}
-
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}
           </div>
         )}
-        <Button variant="primary" type="submit">
+        <Button variant="dark" type="submit" size="lg">
           Enviar
         </Button>
-      </Form>
+     </Form>
     </>
   );
 }

@@ -14,32 +14,40 @@ const CreateKnife = () => {
   const [unidad, setUnidad] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [material, setMaterial] = useState("");
-
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
     };
-
-    fetchData();
+  fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:4003/knives/crear", {
-        codigo,
-        nombre,
-        modelo,
-        precio,
-        medidas: {
-          valor,
-          unidad,
-        },
-        descripcion,
-        material,
-      });
-      console.log(response.data);
+
+    console.log("Valores a enviar:", codigo, nombre, modelo, precio, valor, unidad, descripcion, material);
+
+   try {
+    if (!codigo || !nombre || !modelo || !precio || !valor || !unidad || !descripcion || !material) {
+      setErrorMessage("Todos los campos son obligatorios.");
+      return;
+    }
+    
+    const response = await axios.post("http://localhost:4003/knives/crear", {
+     codigo,
+     nombre,
+     modelo,
+     precio,
+     medidas: {
+      valor,
+      unidad,
+      },
+     descripcion,
+     material,
+    });
+
+    console.log(response.data);
       setSuccessMessage("El cuchillo se creó con éxito.");
 
       setTimeout(() => {
@@ -48,12 +56,13 @@ const CreateKnife = () => {
 
     } catch (error) {
       console.error("Error al enviar la solicitud", error.message);
+      setErrorMessage("Error al enviar la solicitud. Por favor, inténtalo de nuevo.");
     }
   };
 
   return (
     <>
-      <h1>Crea tu Cuchillo</h1>
+      <h1>Crear Cuchillo</h1>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formCodigo">
@@ -81,7 +90,6 @@ const CreateKnife = () => {
             />
           </Form.Group>
         </Row>
-
         <Form.Group className="mb-3" controlId="formPrecio">
           <Form.Label>Precio</Form.Label>
           <Form.Control
@@ -91,9 +99,8 @@ const CreateKnife = () => {
             onChange={(e) => setPrecio(e.target.value)}
           />
         </Form.Group>
-
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formValor">
+        <Form.Group as={Col} controlId="formValor">
             <Form.Label>Medidas (Valor)</Form.Label>
             <Form.Control
               type="text"
@@ -101,19 +108,20 @@ const CreateKnife = () => {
               value={valor}
               onChange={(e) => setValor(e.target.value)}
             />
-          </Form.Group>
+        </Form.Group>
+        <Form.Group as={Col} controlId="formUnidad">
           <Form.Group as={Col} controlId="formUnidad">
-            <Form.Label>Medidas (Unidad)</Form.Label>
-            <Form.Select
-              value={unidad}
-              onChange={(e) => setUnidad(e.target.value)}
-            >
-              <option>pulgadas</option>
-              <option>cm</option>
+           <Form.Label>Medidas (Unidad)</Form.Label>
+           <Form.Select
+           value={unidad}
+           onChange={(e) => setUnidad(e.target.value)} >
+            <option value="" disabled>Select unidad</option>
+            <option value="pulgadas">pulgadas</option>
+            <option value="cm">cm</option>
             </Form.Select>
+           </Form.Group>  
           </Form.Group>
         </Row>
-
         <Form.Group className="mb-3" controlId="formDescripcion">
           <Form.Label>Descripcion</Form.Label>
           <Form.Control
@@ -122,7 +130,6 @@ const CreateKnife = () => {
             onChange={(e) => setDescripcion(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formMaterial">
           <Form.Label>Material</Form.Label>
           <Form.Control
@@ -131,6 +138,12 @@ const CreateKnife = () => {
             onChange={(e) => setMaterial(e.target.value)}
           />
         </Form.Group>
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
+
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}

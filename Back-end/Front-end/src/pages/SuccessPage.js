@@ -5,6 +5,7 @@ const SuccessPage = () => {
     <div>
       <h1>¡Operación Exitosa!</h1>
       <p>El cuchillo se ha guardado con éxito.</p>
+      
     </div>
   );
 };

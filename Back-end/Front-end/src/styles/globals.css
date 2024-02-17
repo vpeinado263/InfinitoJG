@@ -13,12 +13,28 @@
 
 body {
   
-  background-color: rgba(216, 216, 216, 0.925);
+  background-color: rgba(0, 0, 0, 0.925);
+  background-image: url(../../public/images/Fondo.png);
   font-family: 'Book';
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-family: 'fire';
+  text-align: center;
+  
+}
+
+/*Login*/
+
+.login-container {
+  border-radius: 5rem;
+  padding: 2rem;
 }
 
 
-/*formulario de boostraop*/
+/*formulario crear cuchillo*/
 
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,10 +44,7 @@ body {
   border-radius: 10rem;
 }
 
-.titulo {
-  font-family: 'fire';
-  text-align: center;
-  
-}
+
+
 
 

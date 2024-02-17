@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const knifeSchema = new Schema({
     codigo: {
         type: Number,
+        unique: true,
     },
     nombre: {
         type: String,
@@ -13,7 +14,7 @@ const knifeSchema = new Schema({
     },
     precio: {
         type: Number,
-        required: true,
+        required: [true, 'El campo presio es obligatorio.'],
     },
     medidas: {
         valor: {
@@ -28,9 +29,11 @@ const knifeSchema = new Schema({
     },
     descripcion: {
         type: String,
+        default: '' 
     },
     material: {
         type: String,
+        default: '' 
     },
 }, { timestamps: true });
 

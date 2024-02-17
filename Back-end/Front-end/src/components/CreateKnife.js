@@ -34,7 +34,7 @@ const CreateKnife = () => {
       return;
     }
     
-    const response = await axios.post("http://localhost:4003/knives/crear", {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/knives/crear`, {
      codigo,
      nombre,
      modelo,
@@ -56,14 +56,16 @@ const CreateKnife = () => {
 
     } catch (error) {
       console.error("Error al enviar la solicitud", error.message);
-      setErrorMessage("Error al enviar la solicitud. Por favor, inténtalo de nuevo.");
+      setErrorMessage(error.response?.data?.error || "Error al enviar la solicitud. Por favor, inténtalo de nuevo.");
     }
   };
 
   return (
     <>
-     <h1 className="titulo">Crear Cuchillo</h1>
+     <div>
+    
      <Form className="from" onSubmit={handleSubmit}>
+     <h1>Crear Cuchillo</h1>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formCodigo">
           <Form.Label>Codigo</Form.Label>
@@ -149,6 +151,7 @@ const CreateKnife = () => {
           Enviar
         </Button>
      </Form>
+    </div>
     </>
   );
 }

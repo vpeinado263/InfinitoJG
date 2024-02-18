@@ -15,6 +15,7 @@ export default function Home() {
       </Head>
       <Layout>
          <Navbar/>
+         <img src="/Anvil.webp" alt="yunke" className="success"/>
       </Layout>
 
       <main>

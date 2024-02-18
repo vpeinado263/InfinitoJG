@@ -1,3 +1,6 @@
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 @font-face {
   font-family: 'fire';
   src: url('../../public/fonts/FIRES\ PERSONAL\ USE.ttf') format('truetype');
@@ -15,7 +18,7 @@ body {
   
   background-color: rgba(0, 0, 0, 0.925);
   background-image: url(../../public/images/Fondo.png);
-  font-family: 'Book';
+  font-family: 'Boold';
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -23,25 +26,71 @@ body {
 h1 {
   font-family: 'fire';
   text-align: center;
-  
+  height: 5rem;
+}
+
+/*NavBar*/
+.nav-continer {
+ height: 5rem;
+ background-color: transparent;
+ font-family: 'Book';
+ font-size: 1.2em;
+
 }
 
 /*Login*/
 
 .login-container {
-  border-radius: 5rem;
+  padding: 2rem;
+  height: 2rem;
+  font-family: 'Book';
+}
+
+.login-form {
+  height: 20rem;
+  width: 25rem;
+  position: relative;
+  left: 20rem;
+}
+
+.button-container {
   padding: 2rem;
 }
 
+.button {
+  width: 25rem;
+  position: relative;
+  right: 2rem;
+}
 
-/*formulario crear cuchillo*/
+/*RegisterUse*/
 
-@import 'bootstrap/dist/css/bootstrap.min.css';
+.form-container {
+  padding: 2rem;
+}
 
-.from {
-  background-color: rgb(243, 248, 248);
-  padding: 4rem;
-  border-radius: 10rem;
+.form {
+  width: 30rem;
+  position: relative;
+  left: 18rem;
+}
+
+.button-register {
+  width: 30rem;
+}
+
+/*CreateKanife*/
+
+.button-create {
+  width: 66rem;
+}
+
+/*SuccessPage*/
+
+.success {
+ position: relative;
+ left: 18rem;
+ height: 30rem;
 }
 
 

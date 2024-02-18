@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Row, Col, Form, Button } from 'react-bootstrap';
-
 
 const CreateKnife = () => {
   const router = useRouter();
@@ -17,16 +16,8 @@ const CreateKnife = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-    };
-  fetchData();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("Valores a enviar:", codigo, nombre, modelo, precio, valor, unidad, descripcion, material);
 
    try {
     if (!codigo || !nombre || !modelo || !precio || !valor || !unidad || !descripcion || !material) {
@@ -46,13 +37,12 @@ const CreateKnife = () => {
      descripcion,
      material,
     });
-
-    console.log(response.data);
-      setSuccessMessage("El cuchillo se creó con éxito.");
+    
+    setSuccessMessage("El cuchillo se creó con éxito.");
 
       setTimeout(() => {
         router.push('/SuccessPage');
-      }, 3000);
+      }, 1500);
 
     } catch (error) {
       console.error("Error al enviar la solicitud", error.message);
@@ -63,78 +53,75 @@ const CreateKnife = () => {
   return (
     <>
      <div>
-    
-     <Form className="from" onSubmit={handleSubmit}>
-     <h1>Crear Cuchillo</h1>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formCodigo">
-          <Form.Label>Codigo</Form.Label>
+      <Form className="form-container" onSubmit={handleSubmit}>
+        <h1>Crear Cuchillo</h1>
+        <Row className="mb-4">
+          <Col>
+            <Form.Control
+              type="text"
+              value={codigo}
+              onChange={(e) => setCodigo(e.target.value)}
+              placeholder="Codigo"
+            />
+          </Col>
+          <Col>
+            <Form.Control
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              placeholder="Nombre"
+            />
+          </Col>
+          <Col>
+            <Form.Control
+              type="text"
+              value={modelo}
+              onChange={(e) => setModelo(e.target.value)}
+              placeholder="Modelo"
+            />
+          </Col>
+        </Row>
+        <Form.Group className="mb-4" controlId="formPrecio">
           <Form.Control
-          type="text"
-          value={codigo}
-          onChange={(e) => setCodigo(e.target.value)}/>
-        </Form.Group>
-        <Form.Group as={Col} controlId="formNombre">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control
-          type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+            type="text"
+            placeholder="Precio 1234 $"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
           />
         </Form.Group>
-        <Form.Group as={Col} controlId="formModelo">
-          <Form.Label>Modelo</Form.Label>
-          <Form.Control
-          type="text"
-          value={modelo}
-          onChange={(e) => setModelo(e.target.value)}
-          />
-        </Form.Group>
-      </Row>
-      <Form.Group className="mb-3" controlId="formPrecio">
-        <Form.Label>Precio</Form.Label>
-        <Form.Control
-        type="text"
-        placeholder="1234 $"
-        value={precio}
-        onChange={(e) => setPrecio(e.target.value)}
-        />
-      </Form.Group>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formValor">
-          <Form.Label>Largo Total del Cuchillo (Valor)</Form.Label>
-          <Form.Control
-          type="text"
-          placeholder="Valor"
-          value={valor}
-          onChange={(e) => setValor(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group as={Col} controlId="formUnidad">
-            <Form.Label>Medidas (Unidad)</Form.Label>
+        <Row className="mb-4">
+          <Col>
+            <Form.Control
+              type="text"
+              placeholder="Largo Total del Cuchillo (Valor)"
+              value={valor}
+              onChange={(e) => setValor(e.target.value)}
+            />
+          </Col>
+          <Col>
             <Form.Select
-             value={unidad}
-             onChange={(e) => setUnidad(e.target.value)} >
-             <option value="" disabled>Select unidad</option>
-             <option value="pulgadas">pulgadas</option>
-             <option value="cm">cm</option>
+              value={unidad}
+              onChange={(e) => setUnidad(e.target.value)}>
+              <option value="" disabled>Select unidad</option>
+              <option value="pulgadas">pulgadas</option>
+              <option value="cm">cm</option>
             </Form.Select>
-        </Form.Group>  
-      </Row>
-        <Form.Group className="mb-3" controlId="formDescripcion">
-          <Form.Label>Descripcion</Form.Label>
+          </Col>
+        </Row>
+        <Form.Group className="mb-4" controlId="formDescripcion">
           <Form.Control
             type="text"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
+            placeholder="Descripcion General"
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formMaterial">
-          <Form.Label>Material de la Hoja</Form.Label>
+        <Form.Group className="mb-4" controlId="formMaterial">
           <Form.Control
             type="text"
             value={material}
             onChange={(e) => setMaterial(e.target.value)}
+            placeholder="Material de la Hoja"
           />
         </Form.Group>
         {errorMessage && (
@@ -147,10 +134,10 @@ const CreateKnife = () => {
             {successMessage}
           </div>
         )}
-        <Button variant="dark" type="submit" size="lg">
+        <Button variant="dark" type="submit" size="lg" className="button-create">
           Enviar
         </Button>
-     </Form>
+      </Form>
     </div>
     </>
   );

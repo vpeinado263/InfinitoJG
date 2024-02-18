@@ -11,21 +11,21 @@ export default function Login({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
+   try {
       const response = await axios.post('http://localhost:4003/session/login', {
         username,
         password,
       });
-
+      
       if (response.data.token) {
-        console.log('Inicio de sesión exitoso:', response.data.token);
+        console.log('Sesion iniciada con Exito:', response.data.token);
         setToken(response.data.token);
       } else {
         setError('Error al iniciar sesión');
       }
-    } catch (error) {
-      console.error('Error al realizar la llamada de inicio de sesión:', error.message);
-      setError('Error al realizar la llamada de inicio de sesión');
+     } catch (error) {
+      console.error('Completa tanto el nombre de usuario como la contraseña:', error.message);
+      setError('Error al iniciar Sesion. Por favor, verifica tu nombre de usuario y contraseña');
     }
   };
 
@@ -40,7 +40,7 @@ export default function Login({ setToken }) {
             type="text"
             value={username}
             onChange={(e) => setUserName(e.target.value)}
-            placeholder="Ingresa tu nombre de usuario"
+            placeholder="Nombre"
           />
         </Form.Group>
         <Form.Group controlId="formPassword">
@@ -49,12 +49,12 @@ export default function Login({ setToken }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Ingresa tu contraseña"
+            placeholder="Contraseña"
           />
         </Form.Group>
         {error && <Alert variant="danger">{error}</Alert>}
-        <div className="button-wrapper">
-          <Button variant="success" type="submit">
+        <div className="button-container">
+          <Button type="submit" className="button btn-dark" >
             Iniciar sesión
           </Button>
         </div>

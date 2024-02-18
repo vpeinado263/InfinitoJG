@@ -30,31 +30,28 @@ const RegisterUsers = () => {
 
   return (
     <>
-    <div>
+    <div className="form-container">
       <h1>Registro de Usuarios</h1>
-      <Form className="from" onSubmit={handleRegister}>
-        <Form.Group className="mb-3" controlId="formName">
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <Form className="form" onSubmit={handleRegister}>
+        <Form.Group className="mb-4" controlId="formName">
+          <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nombre de Usuario"/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Form.Group className="mb-4" controlId="formEmail">
+          <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)}  placeholder="Correo Electronico@"/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Form.Group className="mb-5" controlId="formPassword">
+          <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)}  placeholder="Contraseña"/>
         </Form.Group>
-        <Button variant="dark" type="submit" size="lg">
-          Registrar
+        <Button variant="dark" type="submit" size="lg" className="button-register">
+          Registrarse
         </Button>
         {errorMessage && (
-          <div className="alert alert-danger mt-3" role="alert">
+          <div className="alert alert-danger mt-2" role="alert">
             {errorMessage}
           </div>
         )}
         {successMessage && (
-          <div className="alert alert-success mt-3" role="alert">
+          <div className="alert alert-success mt-2" role="alert">
             {successMessage}
           </div>
         )}
